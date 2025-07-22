@@ -48,12 +48,12 @@ button:hover {
     background: #0056b3;
 }
 .resi-output {
-    width: 150mm;
-    height: 100mm;
+    width: 140mm;
+    height: 90mm;
     background: #fff;
     border: 2px dashed #333;
     margin: 0 auto;
-    padding: 8px;
+    padding: 16px 16px;
     box-sizing: border-box;
     font-size: 13px;
     color: #222;
@@ -66,14 +66,22 @@ button:hover {
         display: block !important;
         visibility: visible !important;
     }
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    @page {
+        margin: 10mm 10mm 10mm 10mm;
+    }
     .resi-output {
         position: absolute;
         left: 0;
         top: 0;
-        width: 145mm;
-        height: 100mm;
+        width: 140mm;
+        height: 90mm;
         margin: 0;
         box-shadow: none;
         border: none;
+        padding: 16px 16px;
     }
 }
