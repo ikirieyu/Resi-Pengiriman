@@ -24,12 +24,11 @@
             </fieldset>
             <label>Ekspedisi:
                 <select name="ekspedisi" required>
-                    <option value="JNT">J&T</option>
+                    <option value="JNT">JNT</option>
                     <option value="JNE">JNE</option>
                     <option value="TIKI">TIKI</option>
                     <option value="WAHANA">WAHANA</option>
                     <option value="POS">POS</option>
-                    <option value="LION">LION</option>
                 </select>
             </label><br>
             <label>Pembayaran:
@@ -40,6 +39,14 @@
             </label><br><br>
             <button type="submit">Buat Resi</button>
         </form>
+        <div style="margin:16px 0; display:flex; gap:8px; align-items:center;">
+            <label style="margin:0;">Ukuran Kertas:
+                <input type="number" id="paperWidth" value="150" min="50" max="300" style="width:60px;"> x
+                <input type="number" id="paperHeight" value="100" min="50" max="300" style="width:60px;"> mm
+            </label>
+            <button id="printResi" style="display:none;">Print</button>
+        </div>
+        <button id="connectPrinter" type="button" style="margin-bottom:8px;">Connect Printer Bluetooth</button>
         <div id="resiOutput" class="resi-output" style="display:none;"></div>
         <button id="downloadPDF" style="display:none;">Download PDF</button>
     </div>
