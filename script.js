@@ -15,6 +15,10 @@ if (connectBtn && navigator.bluetooth) {
             alert('Printer terdeteksi: ' + device.name + '\nSilakan lanjutkan proses print.');
             // Untuk pengiriman data ke printer, perlu implementasi lebih lanjut sesuai service/characteristic printer
         } catch (e) {
+            if (e && e.name === 'NotFoundError') {
+                // User cancel, tidak perlu alert
+                return;
+            }
             alert('Gagal konek: ' + e);
         }
     });
