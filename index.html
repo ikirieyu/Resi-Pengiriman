@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=150mm, initial-scale=1.0">
+    <title>Resi Pengiriman</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Buat Resi Pengiriman</h1>
+        <form id="resiForm">
+            <fieldset>
+                <legend>Data Pengirim</legend>
+                <label>Nama Pengirim:<br><input type="text" name="namaPengirim" required></label><br>
+                <label>Nomor Pengirim:<br><input type="text" name="nomorPengirim" required></label>
+            </fieldset>
+            <fieldset>
+                <legend>Data Penerima</legend>
+                <label>Nama Penerima:<br><input type="text" name="namaPenerima" required></label><br>
+                <label>Nomor Penerima:<br><input type="text" name="nomorPenerima" required></label><br>
+                <label>Alamat Penerima:<br><textarea name="alamatPenerima" required></textarea></label>
+            </fieldset>
+            <label>Ekspedisi:
+                <select name="ekspedisi" required>
+                    <option value="JNT">JNT</option>
+                    <option value="JNE">JNE</option>
+                    <option value="TIKI">TIKI</option>
+                    <option value="WAHANA">WAHANA</option>
+                    <option value="POS">POS</option>
+                </select>
+            </label><br>
+            <label>Pembayaran:
+                <select name="pembayaran" required>
+                    <option value="COD">COD</option>
+                    <option value="Cashless">Cashless</option>
+                </select>
+            </label><br><br>
+            <button type="submit">Buat Resi</button>
+        </form>
+        <div id="resiOutput" class="resi-output" style="display:none;"></div>
+        <button id="downloadPDF" style="display:none;">Download PDF</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
