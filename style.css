@@ -52,7 +52,7 @@ button:hover {
     height: 95mm;
     background: #fff;
     border: none;
-    margin: 0 auto;
+    margin: 0;
     padding: 10px 10px;
     box-sizing: border-box;
     font-size: 13px;
@@ -61,20 +61,32 @@ button:hover {
     overflow: visible;
 }
 @media print {
+    @page {
+        margin: 0;
+        size: 150mm 100mm;
+    }
     body {
         margin: 0;
         padding: 0;
         min-height: 100vh;
         min-width: 100vw;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
-    @page {
-        margin: 10mm 10mm 10mm 10mm;
+    .container {
+        display: block !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 0 !important;
+        min-width: 0 !important;
+        background: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
     }
-    body > *:not(.resi-output) {
+    /* Sembunyikan semua elemen di dalam .container kecuali .resi-output */
+    .container > *:not(.resi-output) {
         display: none !important;
+        visibility: hidden !important;
     }
     .resi-output, .resi-output * {
         display: block !important;
@@ -82,12 +94,19 @@ button:hover {
     }
     .resi-output {
         position: static;
-        width: 145mm;
-        height: 95mm;
-        margin: 0;
+        width: 138mm;
+        max-width: 138mm;
+        margin: 0 auto;
         box-shadow: none;
         border: none;
-        padding: 10px 10px;
-        /* Centered by flexbox parent */
+        padding: 0 10mm 0 10mm;
+        display: block;
+        font-size: 16px !important;
+        page-break-after: avoid;
+        page-break-before: avoid;
+        break-after: avoid;
+        break-before: avoid;
+        overflow: hidden;
+        /* Rata kiri, isi mulai dari atas */
     }
 }
