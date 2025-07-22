@@ -51,7 +51,7 @@ button:hover {
     width: 140mm;
     height: 90mm;
     background: #fff;
-    border: 2px dashed #333;
+    border: none;
     margin: 0 auto;
     padding: 16px 16px;
     box-sizing: border-box;
@@ -77,8 +77,8 @@ button:hover {
         position: absolute;
         left: 0;
         top: 0;
-        width: 140mm;
-        height: 90mm;
+        width: 150mm;
+        height: 95mm;
         margin: 0;
         box-shadow: none;
         border: none;
