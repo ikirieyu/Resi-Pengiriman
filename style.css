@@ -9,8 +9,8 @@ body {
     margin: 30px auto;
     background: #fff;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    border-radius: 0px;
+    box-shadow: 0 0px 0px rgba(0,0,0,0.1);
 }
 h1 {
     text-align: center;
@@ -48,12 +48,12 @@ button:hover {
     background: #0056b3;
 }
 .resi-output {
-    width: 140mm;
-    height: 90mm;
+    width: 145mm;
+    height: 95mm;
     background: #fff;
     border: none;
     margin: 0 auto;
-    padding: 16px 16px;
+    padding: 10px 10px;
     box-sizing: border-box;
     font-size: 13px;
     color: #222;
@@ -61,11 +61,6 @@ button:hover {
     overflow: visible;
 }
 @media print {
-    body * { display: none !important; }
-    .resi-output, .resi-output * {
-        display: block !important;
-        visibility: visible !important;
-    }
     body {
         margin: 0;
         padding: 0;
@@ -78,14 +73,21 @@ button:hover {
     @page {
         margin: 10mm 10mm 10mm 10mm;
     }
+    body > *:not(.resi-output) {
+        display: none !important;
+    }
+    .resi-output, .resi-output * {
+        display: block !important;
+        visibility: visible !important;
+    }
     .resi-output {
         position: static;
-        width: 140mm;
-        height: 90mm;
+        width: 145mm;
+        height: 95mm;
         margin: 0;
         box-shadow: none;
         border: none;
-        padding: 16px 16px;
+        padding: 10px 10px;
         /* Centered by flexbox parent */
     }
 }
