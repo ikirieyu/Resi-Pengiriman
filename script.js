@@ -1,3 +1,28 @@
+// --- Koneksi ke Printer Bluetooth Blueprint ---
+const connectBtn = document.getElementById('connectPrinter');
+let blueprintDevice = null;
+
+if (connectBtn && navigator.bluetooth) {
+    connectBtn.addEventListener('click', async () => {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+                filters: [
+                    { namePrefix: 'Blue' }, // Ganti sesuai nama printer jika perlu
+                ],
+                optionalServices: [0x1101] // SPP UUID, tidak semua printer support, bisa dikosongkan jika error
+            });
+            blueprintDevice = device;
+            alert('Printer terdeteksi: ' + device.name + '\nSilakan lanjutkan proses print.');
+            // Untuk pengiriman data ke printer, perlu implementasi lebih lanjut sesuai service/characteristic printer
+        } catch (e) {
+            alert('Gagal konek: ' + e);
+        }
+    });
+} else if (connectBtn) {
+    connectBtn.disabled = true;
+    connectBtn.textContent = 'Bluetooth tidak didukung browser ini';
+}
+// --- END koneksi printer ---
 document.getElementById('resiForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const form = e.target;
@@ -28,32 +53,67 @@ document.getElementById('resiForm').addEventListener('submit', function(e) {
     `;
     resiDiv.style.display = 'block';
     document.getElementById('downloadPDF').style.display = 'block';
+    // Tampilkan tombol print
+    if (document.getElementById('printResi')) {
+        document.getElementById('printResi').style.display = '';
+    }
+    setResiSize();
 });
 
-// Download PDF
-// Menggunakan html2pdf.js
-// Pastikan sudah include library html2pdf jika ingin download PDF
 
+// Download PDF
 document.getElementById('downloadPDF').addEventListener('click', function() {
     const resiDiv = document.getElementById('resiOutput');
     if (typeof html2pdf === 'undefined') {
         alert('Fitur download PDF membutuhkan html2pdf.js. Silakan tambahkan library html2pdf.js!');
         return;
     }
-    // Pastikan resiDiv sudah tampil
+    // Ambil ukuran kertas dari input
+    const w = parseInt(document.getElementById('paperWidth').value) || 150;
+    const h = parseInt(document.getElementById('paperHeight').value) || 100;
     resiDiv.style.display = 'block';
-    // Tambahkan style khusus agar html2pdf bisa menangkap isi dengan baik
     resiDiv.style.background = '#fff';
     resiDiv.style.border = '2px solid #333';
-    // Scroll ke resi agar benar-benar rendered
     resiDiv.scrollIntoView({behavior: 'auto', block: 'center'});
-    // Beri delay agar render benar
     setTimeout(function() {
         html2pdf().set({
             margin: 0,
             filename: 'resi_pengiriman.pdf',
             html2canvas: { scale: 2, backgroundColor: '#fff' },
-            jsPDF: { unit: 'mm', format: [150, 100], orientation: 'landscape' }
+            jsPDF: { unit: 'mm', format: [w, h], orientation: w > h ? 'landscape' : 'portrait' }
         }).from(resiDiv).save();
     }, 400);
 });
+
+// --- Fitur print langsung dan atur ukuran kertas ---
+const resiOutput = document.getElementById('resiOutput');
+const printBtn = document.getElementById('printResi');
+const paperWidthInput = document.getElementById('paperWidth');
+const paperHeightInput = document.getElementById('paperHeight');
+
+function setResiSize() {
+    const w = parseInt(paperWidthInput.value) || 150;
+    const h = parseInt(paperHeightInput.value) || 100;
+    resiOutput.style.width = w + 'mm';
+    resiOutput.style.height = h + 'mm';
+    // Update print CSS via style tag
+    let styleTag = document.getElementById('dynamicPrintStyle');
+    if (!styleTag) {
+        styleTag = document.createElement('style');
+        styleTag.id = 'dynamicPrintStyle';
+        document.head.appendChild(styleTag);
+    }
+    styleTag.innerHTML = `@media print { .resi-output { width: ${w}mm !important; height: ${h}mm !important; } @page { size: ${w}mm ${h}mm; } }`;
+}
+
+if (paperWidthInput && paperHeightInput) {
+    paperWidthInput.addEventListener('change', setResiSize);
+    paperHeightInput.addEventListener('change', setResiSize);
+}
+
+if (printBtn) {
+    printBtn.addEventListener('click', function() {
+        setResiSize();
+        window.print();
+    });
+}
