@@ -41,7 +41,7 @@ document.getElementById('resiForm').addEventListener('submit', function(e) {
     };
     const resiDiv = document.getElementById('resiOutput');
     resiDiv.innerHTML = `
-        <h2 style="text-align:center;">RESI PENGIRIMAN</h2>
+        <h2>RESI PENGIRIMAN</h2>
         <hr>
         <b>Ekspedisi:</b> ${data.ekspedisi}<br>
         <b>Pembayaran:</b> ${data.pembayaran}<br><br>
@@ -53,7 +53,7 @@ document.getElementById('resiForm').addEventListener('submit', function(e) {
         Nomor: ${data.nomorPenerima}<br>
         Alamat: ${data.alamatPenerima.replace(/\n/g, '<br>')}<br>
         <hr>
-        <div style="position:absolute;bottom:10px;right:10px;font-size:10px;">Generated: ${new Date().toLocaleString()}</div>
+        <div class="resi-meta">Generated: ${new Date().toLocaleString()}</div>
     `;
     resiDiv.style.display = 'block';
     document.getElementById('downloadPDF').style.display = 'block';
@@ -76,8 +76,8 @@ document.getElementById('downloadPDF').addEventListener('click', function() {
     const w = parseInt(document.getElementById('paperWidth').value) || 150;
     const h = parseInt(document.getElementById('paperHeight').value) || 100;
     resiDiv.style.display = 'block';
-    resiDiv.style.background = '#fff';
-    resiDiv.style.border = '2px solid #333';
+    // Tambahkan class khusus agar style PDF sama seperti print lama
+    resiDiv.classList.add('pdf-export');
     resiDiv.scrollIntoView({behavior: 'auto', block: 'center'});
     setTimeout(function() {
         html2pdf().set({
@@ -85,7 +85,11 @@ document.getElementById('downloadPDF').addEventListener('click', function() {
             filename: 'resi_pengiriman.pdf',
             html2canvas: { scale: 2, backgroundColor: '#fff' },
             jsPDF: { unit: 'mm', format: [w, h], orientation: w > h ? 'landscape' : 'portrait' }
-        }).from(resiDiv).save();
+        }).from(resiDiv).save().then(() => {
+            resiDiv.classList.remove('pdf-export');
+        }).catch(() => {
+            resiDiv.classList.remove('pdf-export');
+        });
     }, 400);
 });
 
