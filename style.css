@@ -1,3 +1,38 @@
+/* Style khusus untuk PDF agar hasil sama seperti print lama */
+.pdf-export {
+    width: 138mm !important;
+    max-width: 138mm !important;
+    margin: 0 auto !important;
+    background: #fff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 6mm 10mm 0 10mm !important;
+    font-size: 16px !important;
+    color: #222 !important;
+    position: static !important;
+    overflow: hidden !important;
+}
+.pdf-export h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 1.35em;
+    letter-spacing: 1px;
+}
+.pdf-export hr {
+    border: none;
+    border-top: 1.5px solid #888;
+    margin: 10px 0 16px 0;
+}
+.pdf-export b {
+    font-weight: 600;
+}
+.pdf-export .resi-meta {
+    font-size: 11px;
+    color: #666;
+    text-align: right;
+    margin-top: 12px;
+}
 body {
     font-family: Arial, sans-serif;
     background: #f4f4f4;
@@ -48,17 +83,77 @@ button:hover {
     background: #0056b3;
 }
 .resi-output {
-    width: 145mm;
-    height: 95mm;
+    width: 100%;
+    max-width: 420px;
+    margin: 24px auto 0 auto;
     background: #fff;
-    border: none;
-    margin: 0;
-    padding: 10px 10px;
+    border: 1.5px solid #bbb;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 18px 22px 16px 22px;
     box-sizing: border-box;
-    font-size: 13px;
+    font-size: 15px;
     color: #222;
     position: relative;
     overflow: visible;
+    transition: box-shadow 0.2s;
+}
+.resi-output h2 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 1.35em;
+    letter-spacing: 1px;
+}
+.resi-output hr {
+    border: none;
+    border-top: 1.5px solid #888;
+    margin: 10px 0 16px 0;
+}
+.resi-output b {
+    font-weight: 600;
+}
+.resi-output .resi-meta {
+    font-size: 11px;
+    color: #666;
+    text-align: right;
+    margin-top: 12px;
+}
+
+@media print {
+    .resi-output {
+        width: 138mm !important;
+        max-width: 138mm !important;
+        margin: 0 auto !important;
+        background: #fff !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 10mm 0 10mm !important;
+        font-size: 16px !important;
+        color: #222 !important;
+        position: static !important;
+        overflow: hidden !important;
+    }
+    .resi-output h2 {
+        text-align: center;
+        margin: 0 0 10px 0;
+        font-size: 1.35em;
+        letter-spacing: 1px;
+    }
+    .resi-output hr {
+        border: none;
+        border-top: 1.5px solid #888;
+        margin: 10px 0 16px 0;
+    }
+    .resi-output b {
+        font-weight: 600;
+    }
+    .resi-output .resi-meta {
+        font-size: 11px;
+        color: #666;
+        text-align: right;
+        margin-top: 12px;
+    }
 }
 @media print {
     @page {
