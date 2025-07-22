@@ -48,7 +48,7 @@ button:hover {
     background: #0056b3;
 }
 .resi-output {
-    width: 135mm;
+    width: 140mm;
     height: 90mm;
     background: #fff;
     border: 2px dashed #333;
@@ -71,13 +71,13 @@ button:hover {
         padding: 0;
     }
     @page {
-        margin: 10mm 10mm 10mm 10mm;
+        margin: 13mm 13mm 13mm 13mm;
     }
     .resi-output {
         position: absolute;
         left: 0;
         top: 0;
-        width: 135mm;
+        width: 140mm;
         height: 90mm;
         margin: 0;
         box-shadow: none;
