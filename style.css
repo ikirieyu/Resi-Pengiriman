@@ -177,7 +177,7 @@ button:hover {
         margin: 0 !important;
         box-sizing: border-box !important;
     }
-    /* Sembunyikan semua elemen di dalam .container kecuali .resi-output */
+    
     .container > *:not(.resi-output) {
         display: none !important;
         visibility: hidden !important;
@@ -201,6 +201,6 @@ button:hover {
         break-after: avoid;
         break-before: avoid;
         overflow: hidden;
-        /* Rata kiri, isi mulai dari atas */
+       
     }
 }
