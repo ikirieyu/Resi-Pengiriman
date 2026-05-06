@@ -1,4 +1,3 @@
-/* Style khusus untuk PDF agar hasil sama seperti print lama */
 .pdf-export {
     width: 138mm !important;
     max-width: 138mm !important;
