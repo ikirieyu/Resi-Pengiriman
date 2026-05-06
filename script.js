@@ -7,16 +7,16 @@ if (connectBtn && navigator.bluetooth) {
         try {
             const device = await navigator.bluetooth.requestDevice({
                 filters: [
-                    { namePrefix: 'Blue' }, // Ganti sesuai nama printer jika perlu
+                    { namePrefix: 'Blue' }, 
                 ],
-                optionalServices: [0x1101] // SPP UUID, tidak semua printer support, bisa dikosongkan jika error
+                optionalServices: [0x1101] 
             });
             blueprintDevice = device;
             alert('Printer terdeteksi: ' + device.name + '\nSilakan lanjutkan proses print.');
-            // Untuk pengiriman data ke printer, perlu implementasi lebih lanjut sesuai service/characteristic printer
+            
         } catch (e) {
             if (e && e.name === 'NotFoundError') {
-                // User cancel, tidak perlu alert
+               
                 return;
             }
             alert('Gagal konek: ' + e);
@@ -72,11 +72,11 @@ document.getElementById('downloadPDF').addEventListener('click', function() {
         alert('Fitur download PDF membutuhkan html2pdf.js. Silakan tambahkan library html2pdf.js!');
         return;
     }
-    // Ambil ukuran kertas dari input
+    
     const w = parseInt(document.getElementById('paperWidth').value) || 150;
     const h = parseInt(document.getElementById('paperHeight').value) || 100;
     resiDiv.style.display = 'block';
-    // Tambahkan class khusus agar style PDF sama seperti print lama
+    
     resiDiv.classList.add('pdf-export');
     resiDiv.scrollIntoView({behavior: 'auto', block: 'center'});
     setTimeout(function() {
@@ -104,7 +104,7 @@ function setResiSize() {
     const h = parseInt(paperHeightInput.value) || 100;
     resiOutput.style.width = w + 'mm';
     resiOutput.style.height = h + 'mm';
-    // Update print CSS via style tag
+    
     let styleTag = document.getElementById('dynamicPrintStyle');
     if (!styleTag) {
         styleTag = document.createElement('style');
