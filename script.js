@@ -1,4 +1,4 @@
-// --- Koneksi ke Printer Bluetooth Blueprint ---
+// --- Koneksi ke Printer Bluetooth ---
 const connectBtn = document.getElementById('connectPrinter');
 let blueprintDevice = null;
 
